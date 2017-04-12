@@ -35,7 +35,7 @@ const SQL_STRING = `CREATE TABLE visits (
  * @param {object} connection A mysql connection object.
  * @param {function} callback The callback function.
  */
-function createTable (connection, callback) {
+function createTable(connection, callback) {
   connection.query(SQL_STRING, callback);
 }
 // [END createTable]
@@ -48,7 +48,7 @@ const FIELDS = ['user', 'password', 'database'];
  *
  * @param {function} callback The callback function.
  */
-function getConnection (callback) {
+function getConnection(callback) {
   prompt.start();
   prompt.get(FIELDS, (err, config) => {
     if (err) {
@@ -60,7 +60,7 @@ function getConnection (callback) {
     const password = encodeURIComponent(config.password);
     const database = encodeURIComponent(config.database);
 
-    const uri = `mysql://${user}:${password}@127.0.0.1:3306/${database}`;
+    const uri = `mysql://${user}:${password}@35.185.170.171:3306/${database}`;
     callback(null, mysql.createConnection(uri));
   });
 }
