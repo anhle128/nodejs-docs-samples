@@ -55,6 +55,9 @@ function syncRecognize (filename, encoding, sampleRateHertz, languageCode) {
       const transcription = results[0];
 
       console.log(`Transcription: ${transcription}`);
+    })
+    .catch((err) => {
+      console.error('ERROR:', err);
     });
   // [END speech_sync_recognize]
 }
@@ -91,6 +94,9 @@ function syncRecognizeGCS (gcsUri, encoding, sampleRateHertz, languageCode) {
       const transcription = results[0];
 
       console.log(`Transcription: ${transcription}`);
+    })
+    .catch((err) => {
+      console.error('ERROR:', err);
     });
   // [END speech_sync_recognize_gcs]
 }
@@ -131,6 +137,9 @@ function asyncRecognize (filename, encoding, sampleRateHertz, languageCode) {
     })
     .then((transcription) => {
       console.log(`Transcription: ${transcription}`);
+    })
+    .catch((err) => {
+      console.error('ERROR:', err);
     });
   // [END speech_async_recognize]
 }
@@ -171,6 +180,9 @@ function asyncRecognizeGCS (gcsUri, encoding, sampleRateHertz, languageCode) {
     })
     .then((transcription) => {
       console.log(`Transcription: ${transcription}`);
+    })
+    .catch((err) => {
+      console.error('ERROR:', err);
     });
   // [END speech_async_recognize_gcs]
 }
