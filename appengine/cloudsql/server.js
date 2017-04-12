@@ -38,6 +38,12 @@ if (process.env.INSTANCE_CONNECTION_NAME) {
 
 // Connect to the database
 const connection = mysql.createConnection(config);
+// console.log('call here');
+connection.connect((err) => {
+  if (err) console.log(err);
+  else console.log('login mysql success')
+});
+// console.log('aaaaaa');
 // [END connect]
 
 // [START insertVisit]
@@ -47,7 +53,7 @@ const connection = mysql.createConnection(config);
  * @param {object} visit The visit record to insert.
  * @param {function} callback The callback function.
  */
-function insertVisit (visit, callback) {
+function insertVisit(visit, callback) {
   connection.query('INSERT INTO `visits` SET ?', visit, (err) => {
     if (err) {
       callback(err);
@@ -69,7 +75,7 @@ LIMIT 10;`;
  *
  * @param {function} callback The callback function.
  */
-function getVisits (callback) {
+function getVisits(callback) {
   connection.query(SQL_STRING, (err, results) => {
     if (err) {
       callback(err);
