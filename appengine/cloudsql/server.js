@@ -39,10 +39,7 @@ if (process.env.INSTANCE_CONNECTION_NAME) {
 // Connect to the database
 const connection = mysql.createConnection(config);
 // console.log('call here');
-connection.connect((err) => {
-  if (err) console.log(err);
-  else console.log('login mysql success')
-});
+
 // console.log('aaaaaa');
 // [END connect]
 
@@ -88,31 +85,13 @@ function getVisits(callback) {
 // [END getVisits]
 
 app.get('/', (req, res, next) => {
-  // Create a visit record to be stored in the database
-  const visit = {
-    timestamp: new Date(),
-    // Store a hash of the visitor's ip address
-    userIp: crypto.createHash('sha256').update(req.ip).digest('hex').substr(0, 7)
-  };
-
-  insertVisit(visit, (err, results) => {
+  connection.connect((err) => {
     if (err) {
-      next(err);
-      return;
+      res.send(err);
     }
-
-    // Query the last 10 visits from the database.
-    getVisits((err, visits) => {
-      if (err) {
-        next(err);
-        return;
-      }
-
-      res
-        .status(200)
-        .set('Content-Type', 'text/plain')
-        .send(`Last 10 visits:\n${visits.join('\n')}`);
-    });
+    else {
+      res.send(JSON.stringify(config));
+    }
   });
 });
 
